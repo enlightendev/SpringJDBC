@@ -1,7 +1,10 @@
 package com.springapp.jdbc.console;
 
 import com.springapp.jdbc.dao.ContactDao;
+import com.springapp.jdbc.domain.Contact;
 import org.springframework.context.support.GenericXmlApplicationContext;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,5 +26,10 @@ public class SpringJDBCMain {
         // Find first name by id
         System.out.println("First name for contact id 1 is: " + contactDao.findFirstNameById(1l));
 
+        List<Contact> contacts = contactDao.findAll();
+
+        for (Contact contact: contacts) {
+            System.out.println(contact);
+        }
     }
 }

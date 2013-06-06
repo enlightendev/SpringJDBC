@@ -26,14 +26,23 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 /**
- * @author Clarence
+ *
  *
  */
 public class JdbcContactDao implements ContactDao, InitializingBean {
 
 	private JdbcTemplate jdbcTemplate;
+
+    /**
+     * In Spring, a variant of JdbcTemplate, called NamedParameterJdbcTemplate allows
+     * use of named parameters to ensure that the parameter is being bound exactly
+     * as wanted.
+     */
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
+
+    /**
+     * Injected by spring container; defined in app-context-xml.xml
+     */
 	private DataSource dataSource;
 
 	public DataSource getDataSource() {
@@ -126,8 +135,7 @@ public class JdbcContactDao implements ContactDao, InitializingBean {
 	
 	private static final class ContactWithDetailExtractor implements ResultSetExtractor<List<Contact>> {
 
-		public List<Contact> extractData(ResultSet rs) throws SQLException,
-				DataAccessException {
+		public List<Contact> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
 			Map<Long, Contact> map = new HashMap<Long, Contact>();
 			Contact contact = null;
